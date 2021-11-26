@@ -18,7 +18,7 @@ NOUN_CONTRACT = w3.eth.contract(address=NOUN_ADDRESS, abi=NOUN_ABI)
 def get_max_nouns():
     return NOUN_CONTRACT.caller().totalSupply()
 
-@lru_cache
+@lru_cache(maxsize=4096)
 def get_noun_svg(idx):
     noun_data = NOUN_CONTRACT.caller().dataURI(idx)
     noun_b64 = noun_data.split(',')[-1]
